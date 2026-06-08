@@ -158,11 +158,7 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(height: 24),
                         const Text('Hello World Liane!'),
                         const SizedBox(height: 8),
-                        Text(
-                          'cor_fundo: ${_remoteConfig.getString('cor_fundo')} • propaganda: $_propaganda',
-                          style: Theme.of(context).textTheme.bodySmall,
-                          textAlign: TextAlign.center,
-                        ),
+                
                         const SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: () async {
