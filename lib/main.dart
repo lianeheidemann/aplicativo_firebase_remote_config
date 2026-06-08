@@ -156,9 +156,6 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         const SizedBox(height: 24),
-                        const Text('Hello World Liane!'),
-                        const SizedBox(height: 8),
-                
                         const SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: () async {
