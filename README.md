@@ -26,22 +26,6 @@ This project provides a production-ready implementation of Firebase Remote Confi
 
 ---
 
-## Features
-
-**Core Functionality**
-- Firebase initialization with `firebase_core`
-- Automatic fetch and activation of Remote Config
-- Real-time dynamic UI updates
-- Manual refresh functionality
-
-**UI Components**
-- Background color customization
-- Dynamic promotional images
-- Graceful fallback to default values
-- Production-ready error handling
-
----
-
 ## Demo
 
 **Background Color Update**
@@ -56,13 +40,13 @@ This project provides a production-ready implementation of Firebase Remote Confi
 
 ## Technology Stack
 
-| Component | Purpose | Version |
-|-----------|---------|---------|
-| Flutter | Cross-platform UI framework | 3.0+ |
-| firebase_core | Firebase initialization | Latest |
-| firebase_remote_config | Configuration management | Latest |
-| url_launcher | URL navigation | Latest |
-| Dart | Programming language | 3.0+ |
+| Component | Purpose |
+|-----------|---------|
+| Flutter | Cross-platform UI framework |
+| firebase_core | Firebase initialization |
+| firebase_remote_config | Configuration management |
+| url_launcher | URL navigation |
+| Dart | Programming language |
 
 ---
 
@@ -88,20 +72,8 @@ cd aplicativo_firebaseremoteconfig
 flutter pub get
 ```
 
-#### 3. Firebase Configuration
 
-**Using FlutterFire CLI (Recommended):**
-```bash
-dart pub global activate flutterfire_cli
-flutterfire configure
-```
-
-**Manual Configuration:**
-1. Download `google-services.json` from Firebase Console
-2. Place in `android/app/`
-3. Verify Firebase plugins in `android/build.gradle`
-
-#### 4. Application Launch
+#### 3. Application Launch
 ```bash
 flutter run
 ```
@@ -109,28 +81,6 @@ flutter run
 ---
 
 ## Configuration
-
-### Remote Configuration Parameters
-
-#### Background Color (`cor_fundo`)
-
-| Attribute | Specification |
-|-----------|---------------|
-| Type | String (Hexadecimal) |
-| Format | `#RRGGBB` |
-| Default Value | `#FFFFFF` |
-| Application | Scaffold background color |
-| Examples | `#FF5733`, `#3498DB`, `#2ECC71` |
-
-#### Promotional Image (`propaganda`)
-
-| Attribute | Specification |
-|-----------|---------------|
-| Type | String |
-| Default Value | `default` |
-| Valid Values | `alternativa` or custom |
-| Behavior | `alternativa` → `propaganda_alt.png` |
-| | Default → `propaganda.png` |
 
 ### Firebase Console Configuration
 
@@ -147,31 +97,6 @@ flutter run
 5. Allow 5-10 seconds for propagation
 6. Open application and select **Refresh** button
 
-### Configuration Examples
-
-**Configuration A - Red Theme:**
-```json
-{
-  "cor_fundo": "#FF0000",
-  "propaganda": "alternativa"
-}
-```
-
-**Configuration B - Blue Theme:**
-```json
-{
-  "cor_fundo": "#0000FF",
-  "propaganda": "default"
-}
-```
-
-**Configuration C - Green Theme:**
-```json
-{
-  "cor_fundo": "#2ECC71",
-  "propaganda": "default"
-}
-```
 
 ---
 
@@ -195,43 +120,6 @@ aplicativo_firebaseremoteconfig/
 ├── pubspec.yaml                     # Dependencies
 ├── firebase.json                    # Firebase settings
 └── README.md                        # Documentation
-```
-
----
-
-## Implementation
-
-### Remote Config Initialization
-
-```dart
-final remoteConfig = FirebaseRemoteConfig.instance;
-
-await remoteConfig.setDefaults({
-  'cor_fundo': '#FFFFFF',
-  'propaganda': 'default',
-});
-
-await remoteConfig.fetchAndActivate();
-```
-
-### Configuration Access
-
-```dart
-String backgroundColor = remoteConfig.getString('cor_fundo');
-String imageType = remoteConfig.getString('propaganda');
-```
-
-### Manual Configuration Refresh
-
-```dart
-void _refreshConfig() async {
-  try {
-    await remoteConfig.fetchAndActivate();
-    setState(() {});
-  } catch (e) {
-    print('Configuration refresh failed: $e');
-  }
-}
 ```
 
 ---
@@ -265,36 +153,6 @@ flutter pub upgrade
 3. Publish new configuration
 4. Select **Refresh** button in application
 5. Verify UI updates
-
-### Validation Checklist
-
-- Hexadecimal color value testing
-- Propaganda configuration variants
-- Network error handling
-- Firebase usage monitoring
-
----
-
-## Use Cases
-
-| Application | Description |
-|-------------|-------------|
-| A/B Testing | Color scheme variation testing |
-| Feature Flags | Feature enablement control |
-| Promotional Management | Dynamic promotional content |
-| Theme Management | Real-time theme switching |
-| Regional Customization | Region-specific content |
-| Emergency Updates | Rapid UI updates without store deployment |
-
----
-
-## Documentation
-
-- [Firebase Remote Config Documentation](https://firebase.google.com/docs/remote-config)
-- [Flutter Firebase Integration](https://firebase.flutter.dev)
-- [Flutter Documentation](https://flutter.dev/docs)
-- [Firebase Console](https://console.firebase.google.com)
-- [FlutterFire CLI](https://firebase.flutter.dev/docs/cli)
 
 ---
 
