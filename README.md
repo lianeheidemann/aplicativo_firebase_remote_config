@@ -8,7 +8,7 @@ A production-ready Flutter application demonstrating Firebase Remote Config inte
 [![Firebase](https://img.shields.io/badge/Firebase-Latest-orange?style=for-the-badge&logo=firebase)](https://firebase.google.com)
 [![Dart](https://img.shields.io/badge/Dart-3.0+-1f425f?style=for-the-badge&logo=dart)](https://dart.dev)
 
-[Features](#features) • [Installation](#installation) • [Configuration](#configuration) • [Resources](#resources)
+[Features](#features) • [Installation](#installation) • [Configuration](#configuration) • [Resources]
 
 </div>
 
@@ -16,7 +16,7 @@ A production-ready Flutter application demonstrating Firebase Remote Config inte
 
 ## Overview
 
-This project provides a production-ready implementation of Firebase Remote Config in Flutter, enabling dynamic control of application UI elements without requiring new app releases. Configuration updates are instantly reflected across all user devices, perfect for A/B testing, feature flags, promotional campaigns, and dynamic theming.
+This project provides a production-ready implementation of Firebase Remote Config in Flutter, enabling dynamic control of application UI elements without requiring new app releases. Configuration [...]
 
 **Primary Applications:**
 - A/B testing UI variations
@@ -132,9 +132,9 @@ aplicativo_firebaseremoteconfig/
 dependencies:
   flutter:
     sdk: flutter
-  firebase_core: ^latest
-  firebase_remote_config: ^latest
-  url_launcher: ^latest
+  firebase_core: ^4.10.0
+  firebase_remote_config: ^6.5.2
+  url_launcher: ^6.3.1
 ```
 
 **Update dependencies:**
