@@ -26,12 +26,12 @@ Watch the app in action with Firebase Remote Config:
 
 ### Atualizando a Cor de Fundo
 <p align="left">
-  <img src="https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig/raw/main/assets/images/gif1_cor_FirebaseRemoteConfig.gif" width="400" alt="GIF mostrando atualização de cor">
+  <img src="https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig/raw/main/assets/gifs/gif1_cor_FirebaseRemoteConfig.gif" width="400" alt="GIF mostrando atualização de cor">
 </p>
 
 ### Alterando a Propaganda
 <p align="left">
-  <img src="https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig/raw/main/assets/images/gif2_propaganda_FirebaseRemoteConfig.gif" width="400" alt="GIF mostrando alteração de propaganda">
+  <img src="https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig/raw/main/assets/gifs/gif2_propaganda_FirebaseRemoteConfig.gif" width="400" alt="GIF mostrando alteração de propaganda">
 </p>
 
 ## 🛠️ Technologies Used
