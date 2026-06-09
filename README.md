@@ -5,7 +5,7 @@
 A production-ready Flutter application demonstrating Firebase Remote Config integration for dynamic UI control and real-time configuration management without app redeployment.
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.0+-blue?style=for-the-badge&logo=flutter)](https://flutter.dev)
-[![Firebase](https://img.shields.io/badge/Firebase-Latest-orange?style=for-the-badge&logo=firebase)](https://firebase.google.com)
+[![Firebase](https://img.shields.io/badge/Firebase-11.0+-orange?style=for-the-badge&logo=firebase)](https://firebase.google.com)
 [![Dart](https://img.shields.io/badge/Dart-3.0+-1f425f?style=for-the-badge&logo=dart)](https://dart.dev)
 
 [Features](#features) • [Installation](#installation) • [Configuration](#configuration) • [Resources](#resources)
@@ -16,7 +16,7 @@ A production-ready Flutter application demonstrating Firebase Remote Config inte
 
 ## Overview
 
-This project provides a production-ready implementation of Firebase Remote Config in Flutter, enabling dynamic control of application UI elements without requiring new app releases. Configuration updates are instantly reflected across all user devices, perfect for A/B testing, feature flags, promotional campaigns, and dynamic theming.
+This project provides a production-ready implementation of Firebase Remote Config in Flutter, enabling dynamic control of application UI elements without requiring new app releases. Configuration management supports:
 
 **Primary Applications:**
 - A/B testing UI variations
@@ -59,9 +59,9 @@ This project provides a production-ready implementation of Firebase Remote Confi
 | Component | Purpose | Version |
 |-----------|---------|---------|
 | Flutter | Cross-platform UI framework | 3.0+ |
-| firebase_core | Firebase initialization | Latest |
-| firebase_remote_config | Configuration management | Latest |
-| url_launcher | URL navigation | Latest |
+| firebase_core | Firebase initialization | 3.0+ |
+| firebase_remote_config | Configuration management | 5.0+ |
+| url_launcher | URL navigation | 6.2+ |
 | Dart | Programming language | 3.0+ |
 
 ---
@@ -244,9 +244,9 @@ void _refreshConfig() async {
 dependencies:
   flutter:
     sdk: flutter
-  firebase_core: ^latest
-  firebase_remote_config: ^latest
-  url_launcher: ^latest
+  firebase_core: ^3.0.0
+  firebase_remote_config: ^5.0.0
+  url_launcher: ^6.2.0
 ```
 
 **Update dependencies:**
@@ -296,7 +296,7 @@ This application demonstrates:
 **Liane Heidemann**
 
 - GitHub: [@lianeheidemann](https://github.com/lianeheidemann)
-- Repository: [aplicativo_firebaseremoteconfig](https://github.com/lianeheidemann/.aplicativo_firebaseremoteconfig)
+- Repository: [aplicativo_firebaseremoteconfig](https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig)
 
 ---
 
