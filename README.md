@@ -1,100 +1,180 @@
-# aplicativo_firebaseremoteconfig
+# 🔥 aplicativo_firebaseremoteconfig
 
-Flutter app de exemplo integrando **Firebase Remote Config** para controlar a UI remotamente (cor de fundo e imagem de propaganda).
+A Flutter example app demonstrating **Firebase Remote Config** integration for dynamic UI control (background color and promotional images).
 
-## Funcionalidades
+[![Flutter](https://img.shields.io/badge/Flutter-3.0+-blue?style=flat-square&logo=flutter)](https://flutter.dev)
+[![Firebase](https://img.shields.io/badge/Firebase-Latest-orange?style=flat-square&logo=firebase)](https://firebase.google.com)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-- Inicializa o Firebase (via `firebase_core`).
-- Busca e ativa configurações do **Firebase Remote Config** na inicialização.
-- Controla:
-  - **Cor de fundo** (Remote Config key: `cor_fundo`)
-  - **Imagem de propaganda** (Remote Config key: `propaganda`)
-- Permite atualizar manualmente as configurações pelo botão de refresh.
-- Botão para abrir um link externo (`https://www.google.com`).
+## 📋 Overview
 
-## Tecnologias
+This project showcases how to use **Firebase Remote Config** to dynamically control app UI without deploying new versions. Update colors, images, and other configurations in real-time via Firebase Console.
 
-- Flutter
-- Firebase:
-  - `firebase_core`
-  - `firebase_remote_config`
-- `url_launcher` para abrir URL externa
+## ✨ Key Features
 
-## Configuração do Firebase
+- ✅ Firebase initialization with `firebase_core`
+- ✅ Fetch and activate Firebase Remote Config on app startup
+- ✅ Dynamic control of:
+  - **Background color** (Remote Config key: `cor_fundo`)
+  - **Promotional image** (Remote Config key: `propaganda`)
+- ✅ Manual refresh button to update configurations
+- ✅ External link launcher for promotional URLs
 
-O projeto utiliza o arquivo gerado pelo FlutterFire para as opções padrão:
+## 🛠️ Technologies Used
 
-- `lib/firebase_options.dart`
+| Technology | Purpose |
+|---|---|
+| **Flutter** | Cross-platform UI framework |
+| **firebase_core** | Firebase initialization |
+| **firebase_remote_config** | Remote configuration management |
+| **url_launcher** | Open external URLs |
 
-> Observação: no arquivo `firebase_options.dart` há suporte/validações para múltiplas plataformas, mas os valores concretos estão configurados para **Android** (via `android/app/google-services.json`).
+## 📦 Remote Config Keys Reference
 
-### Android
+### `cor_fundo` (Background Color)
+- **Type:** String (Hex color format)
+- **Format:** `#RRGGBB`
+- **Default:** `#FFFFFF` (white)
+- **Effect:** Sets the Scaffold background color
 
-- `android/app/google-services.json`
+### `propaganda` (Promotional Image)
+- **Type:** String
+- **Default:** `default`
+- **Behavior:**
+  - `"alternativa"` → displays `assets/images/propaganda_alt.png`
+  - Any other value → displays `assets/images/propaganda.png`
 
-## Remote Config (chaves e comportamento)
+## 🚀 Getting Started
 
-As chaves abaixo são definidas com defaults em `lib/main.dart`:
+### Prerequisites
+- Flutter SDK 3.0+
+- Firebase project configured
+- Android SDK (or iOS SDK if using iOS)
 
-- `cor_fundo`
-  - Tipo esperado: **string** com cor em formato **hex** `#RRGGBB`
-  - Default: `#FFFFFF`
-  - Efeito: define a cor de fundo do `Scaffold`
+### Installation
 
-- `propaganda`
-  - Tipo esperado: **string** com valores conhecidos
-  - Defaults: `default`
-  - Efeitos:
-    - `propaganda = "alternativa"` → usa `assets/images/propaganda_alt.png`
-    - Qualquer outro valor → usa `assets/images/propaganda.png`
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig.git
+   cd aplicativo_firebaseremoteconfig
+   ```
 
-## Como executar localmente
-
-1. Instale as dependências:
-
+2. **Install dependencies:**
    ```bash
    flutter pub get
    ```
 
-2. Configure seu projeto Firebase (se necessário):
-   - Certifique-se de ter o `google-services.json` em `android/app/`.
+3. **Configure Firebase:**
+   - Ensure `android/app/google-services.json` is present
+   - If missing, regenerate via [FlutterFire CLI](https://firebase.flutter.dev/docs/cli)
+   ```bash
+   flutterfire configure
+   ```
 
-3. Execute no Android:
-
+4. **Run the app:**
    ```bash
    flutter run
    ```
 
-## Como testar o Remote Config
+## 🧪 Testing Remote Config
 
-No console do Firebase:
+### Setup in Firebase Console
 
-1. Vá em **Remote Config** → crie um fluxo/alteração.
-2. Defina valores (exemplos):
-   - `cor_fundo`: `#FF0000`
-   - `propaganda`: `alternativa`
-3. Publique e aguarde propagação.
-4. Abra o app e, se necessário, toque no botão de refresh.
+1. Go to **Firebase Console** → Your Project → **Remote Config**
+2. Click **Create Configuration**
+3. Add parameters:
 
-## Estrutura do projeto
+   | Parameter | Value | Type |
+   |---|---|---|
+   | `cor_fundo` | `#FF0000` | String |
+   | `propaganda` | `alternativa` | String |
 
-- `lib/main.dart`
-  - Implementa a lógica de carregamento do Remote Config (`setDefaults`, `fetchAndActivate`).
-  - Monta a UI usando os valores recebidos.
+4. **Publish** the configuration
+5. Wait for propagation (usually a few seconds)
+6. Open the app and tap the **Refresh** button to fetch updates
 
-- `assets/images/`
-  - `propaganda.png`
-  - `propaganda_alt.png`
+### Example Configurations
 
-- `firebase.json`
-  - Configurações do Firebase para o projeto.
+#### Red Background with Alternative Image
+```
+cor_fundo: #FF0000
+propaganda: alternativa
+```
 
-## Dependências (principais)
+#### Blue Background with Default Image
+```
+cor_fundo: #0000FF
+propaganda: default
+```
 
-- `firebase_core`
-- `firebase_remote_config`
-- `url_launcher`
+## 📁 Project Structure
+
+```
+.
+├── lib/
+│   ├── main.dart                    # App entry point & Remote Config logic
+│   └── firebase_options.dart        # Firebase configuration
+├── android/
+│   └── app/
+│       └── google-services.json     # Firebase Android config
+├── assets/
+│   └── images/
+│       ├── propaganda.png           # Default promotional image
+│       └── propaganda_alt.png       # Alternative promotional image
+├── firebase.json                    # Firebase project config
+└── pubspec.yaml                     # Flutter dependencies
+```
+
+## 📄 Configuration Files
+
+### `lib/firebase_options.dart`
+Auto-generated by FlutterFire CLI. Contains Firebase configuration for multiple platforms.
+
+### `android/app/google-services.json`
+Android Firebase configuration. Required for the app to connect to Firebase.
+
+### `pubspec.yaml`
+Main dependencies file. Run `flutter pub get` after modifications.
+
+## 🔧 Main Implementation
+
+The core logic is in `lib/main.dart`:
+
+```dart
+// Initialize Remote Config with defaults
+remoteConfig.setDefaults({
+  'cor_fundo': '#FFFFFF',
+  'propaganda': 'default',
+});
+
+// Fetch and activate configuration
+await remoteConfig.fetchAndActivate();
+```
+
+## 💡 Use Cases
+
+- 🎨 A/B testing color schemes
+- 📢 Promote different images without app updates
+- 🔄 Feature flags and rollouts
+- 🌐 Localized content management
+- 📊 Real-time analytics-driven UI changes
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
+
+## 📝 License
+
+This project is open source and available under the MIT License.
+
+## 📚 Resources
+
+- [Firebase Remote Config Documentation](https://firebase.google.com/docs/remote-config)
+- [Flutter Firebase Plugin](https://firebase.flutter.dev)
+- [Flutter Documentation](https://flutter.dev/docs)
 
 ---
 
-Feito para demonstrar um fluxo simples e funcional de **Remote Config** controlando parâmetros visuais do app.
+**Created to demonstrate a simple and functional Remote Config flow controlling app visual parameters.**
+
+Made with ❤️ by [@lianeheidemann](https://github.com/lianeheidemann)
