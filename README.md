@@ -24,14 +24,15 @@ This project showcases how to use **Firebase Remote Config** to dynamically cont
 
 Watch the app in action with Firebase Remote Config:
 
-
-
-<p>
-  <img src="https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig/blob/main/assets/images/gif_FirebaseRemoteConfig.gif" width="750">
+### Atualizando a Cor de Fundo
+<p align="center">
+  <img src="https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig/raw/main/assets/images/gif1_cor_FirebaseRemoteConfig.gif" width="400" alt="GIF mostrando atualização de cor">
 </p>
 
-</div>
-
+### Alterando a Propaganda
+<p align="center">
+  <img src="https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig/raw/main/assets/images/gif2_propaganda_FirebaseRemoteConfig.gif" width="400" alt="GIF mostrando alteração de propaganda">
+</p>
 
 ## 🛠️ Technologies Used
 
@@ -134,7 +135,8 @@ propaganda: default
 │   └── images/
 │       ├── propaganda.png           # Default promotional image
 │       ├── propaganda_alt.png       # Alternative promotional image
-│       └── video_FirebaseRemoteConfig.mp4  # Demo video
+│       ├── gif1_cor_FirebaseRemoteConfig.gif       # Demo GIF - Color update
+│       └── gif2_propaganda_FirebaseRemoteConfig.gif # Demo GIF - Propaganda change
 ├── firebase.json                    # Firebase project config
 └── pubspec.yaml                     # Flutter dependencies
 ```
