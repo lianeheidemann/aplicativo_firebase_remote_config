@@ -59,10 +59,10 @@ This project provides a production-ready implementation of Firebase Remote Confi
 | Component | Purpose | Version |
 |-----------|---------|---------|
 | Flutter | Cross-platform UI framework | 3.0+ |
-| firebase_core | Firebase initialization | 3.0+ |
-| firebase_remote_config | Configuration management | 5.0+ |
-| url_launcher | URL navigation | 6.2+ |
-| Dart | Programming language | 3.0+ |
+| firebase_core | Firebase initialization | 4.10+ |
+| firebase_remote_config | Configuration management | 6.5+ |
+| url_launcher | URL navigation | 6.3+ |
+| Dart | Programming language | 3.11+ |
 
 ---
 
@@ -71,6 +71,7 @@ This project provides a production-ready implementation of Firebase Remote Confi
 ### System Requirements
 
 - Flutter SDK 3.0 or higher
+- Dart SDK 3.11 or higher
 - Firebase CLI
 - Android SDK or iOS SDK
 - Active Firebase project
@@ -110,17 +111,30 @@ flutter run
 
 ## Configuration
 
+### Firebase Setup
+
+Before using this application, ensure you have:
+1. Created a Firebase project in [Firebase Console](https://console.firebase.google.com)
+2. Enabled Firebase Remote Config
+3. Configured your app with `flutterfire configure` or manual setup
+
 ### Remote Configuration Parameters
 
 #### Background Color (`cor_fundo`)
 
 | Attribute | Specification |
 |-----------|---------------|
-| Type | String (Hexadecimal) |
-| Format | `#RRGGBB` |
-| Default Value | `#FFFFFF` |
+| Type | String (Hexadecimal Color Code) |
+| Format | `#RRGGBB` (6 digits) |
+| Default Value | `#FFFFFF` (white) |
 | Application | Scaffold background color |
-| Examples | `#FF5733`, `#3498DB`, `#2ECC71` |
+| Validation | Must be valid hex format, invalid values default to white |
+| Examples | `#FF0000` (red), `#0000FF` (blue), `#2ECC71` (green) |
+
+**Color Parsing:**
+- The application uses hex-to-RGB conversion internally
+- Invalid hex values automatically fallback to white (`#FFFFFF`)
+- The parser expects exactly 6 hexadecimal digits after `#`
 
 #### Promotional Image (`propaganda`)
 
@@ -128,28 +142,55 @@ flutter run
 |-----------|---------------|
 | Type | String |
 | Default Value | `default` |
-| Valid Values | `alternativa` or custom |
-| Behavior | `alternativa` → `propaganda_alt.png` |
-| | Default → `propaganda.png` |
+| Valid Values | `alternativa` or `default` |
+| Behavior | `alternativa` → displays `propaganda_alt.png` |
+| | `default` → displays `propaganda.png` |
+| Invalid Values | Default to `propaganda.png` if value not recognized |
+
+### Remote Config Settings
+
+This application uses optimized Remote Config settings:
+
+```dart
+RemoteConfigSettings(
+  fetchTimeout: Duration(minutes: 1),        // Max time to fetch config
+  minimumFetchInterval: Duration.zero,       // Allows immediate fetches
+)
+```
+
+- **fetchTimeout**: Maximum 1 minute to retrieve config (prevents app hangs)
+- **minimumFetchInterval**: Set to zero to allow manual refreshes without delays
 
 ### Firebase Console Configuration
 
-1. Navigate to Firebase Console → Remote Config
-2. Select **Create Configuration**
-3. Add parameters:
+#### Step-by-Step Setup:
 
-| Parameter | Value | Type |
-|-----------|-------|------|
-| cor_fundo | #FF0000 | String |
-| propaganda | alternativa | String |
+1. **Navigate to Remote Config**
+   - Open [Firebase Console](https://console.firebase.google.com)
+   - Select your project
+   - Go to **Remote Config** in the left sidebar
 
-4. Click **Publish Configuration**
-5. Allow 5-10 seconds for propagation
-6. Open application and select **Refresh** button
+2. **Create Configuration**
+   - Click **Create Configuration**
+   - Add the following parameters:
+
+| Parameter | Value | Type | Description |
+|-----------|-------|------|-------------|
+| `cor_fundo` | `#FF0000` | String | Background color (hex code) |
+| `propaganda` | `alternativa` | String | Image variant selector |
+
+3. **Publish Configuration**
+   - Click **Publish Configuration**
+   - Allow 5-10 seconds for propagation to all devices
+
+4. **Refresh in Application**
+   - Open the app
+   - Click the **Refresh** button (top-right) to fetch latest config
+   - Watch the UI update in real-time
 
 ### Configuration Examples
 
-**Configuration A - Red Theme:**
+#### Configuration A - Red Theme with Alternative Image
 ```json
 {
   "cor_fundo": "#FF0000",
@@ -157,7 +198,7 @@ flutter run
 }
 ```
 
-**Configuration B - Blue Theme:**
+#### Configuration B - Blue Theme with Default Image
 ```json
 {
   "cor_fundo": "#0000FF",
@@ -165,13 +206,31 @@ flutter run
 }
 ```
 
-**Configuration C - Green Theme:**
+#### Configuration C - Green Theme with Default Image
 ```json
 {
   "cor_fundo": "#2ECC71",
   "propaganda": "default"
 }
 ```
+
+#### Configuration D - Custom Purple Theme
+```json
+{
+  "cor_fundo": "#9B59B6",
+  "propaganda": "default"
+}
+```
+
+### Troubleshooting Configuration
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| Colors not updating | Remote Config not fetched | Click **Refresh** button in app |
+| Invalid color appears white | Hex code format error | Ensure format is `#RRGGBB` with 6 digits |
+| Image not changing | Parameter name typo | Verify parameter is exactly `propaganda` |
+| Config takes too long | Poor network connection | Check Firebase Console, wait 10 seconds |
+| App crashes on startup | Firebase not initialized | Verify `flutterfire configure` was run |
 
 ---
 
@@ -206,30 +265,54 @@ aplicativo_firebaseremoteconfig/
 ```dart
 final remoteConfig = FirebaseRemoteConfig.instance;
 
+// Configure fetch timeout and minimum fetch interval
+await remoteConfig.setConfigSettings(
+  RemoteConfigSettings(
+    fetchTimeout: const Duration(minutes: 1),
+    minimumFetchInterval: Duration.zero,
+  ),
+);
+
+// Set default values
 await remoteConfig.setDefaults({
   'cor_fundo': '#FFFFFF',
   'propaganda': 'default',
 });
 
+// Fetch and activate remote config
 await remoteConfig.fetchAndActivate();
 ```
 
 ### Configuration Access
 
 ```dart
+// Get string values from Remote Config
 String backgroundColor = remoteConfig.getString('cor_fundo');
 String imageType = remoteConfig.getString('propaganda');
+
+// Parse hex color string
+Color parseColor(String hex) {
+  final value = hex.replaceAll('#', '').trim();
+  if (value.length == 6) {
+    return Color(int.parse('FF$value', radix: 16));
+  }
+  return Colors.white; // Fallback to white
+}
+
+// Apply parsed color
+Color bgColor = parseColor(backgroundColor);
 ```
 
 ### Manual Configuration Refresh
 
 ```dart
-void _refreshConfig() async {
+void refreshConfig() async {
   try {
     await remoteConfig.fetchAndActivate();
-    setState(() {});
+    setState(() {}); // Update UI with new values
   } catch (e) {
     print('Configuration refresh failed: $e');
+    // Show error to user or use cached values
   }
 }
 ```
@@ -238,15 +321,20 @@ void _refreshConfig() async {
 
 ## Dependencies
 
-**pubspec.yaml configuration:**
+**Current versions in pubspec.yaml:**
 
 ```yaml
 dependencies:
   flutter:
     sdk: flutter
-  firebase_core: ^3.0.0
-  firebase_remote_config: ^5.0.0
-  url_launcher: ^6.2.0
+  firebase_core: ^4.10.0
+  firebase_remote_config: ^6.5.2
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
 ```
 
 **Update dependencies:**
@@ -260,11 +348,30 @@ flutter pub upgrade
 
 ### Local Testing Procedure
 
-1. Execute `flutter run`
-2. Open Firebase Console
-3. Publish new configuration
-4. Select **Refresh** button in application
-5. Verify UI updates
+1. **Launch Application**
+   ```bash
+   flutter run
+   ```
+
+2. **Configure in Firebase Console**
+   - Navigate to Remote Config
+   - Publish new configuration with test values
+
+3. **Refresh Configuration in App**
+   - Click the **Refresh** button (top-right icon)
+   - Observe real-time UI updates
+
+4. **Verify Changes**
+   - Check background color change
+   - Verify image switching between `default` and `alternativa`
+   - Confirm no lag or errors in console
+
+### Manual Testing Scenarios
+
+- **Scenario 1**: Change color multiple times and refresh to verify updates
+- **Scenario 2**: Switch promotional image variant and refresh
+- **Scenario 3**: Disconnect network, try refresh (should show error gracefully)
+- **Scenario 4**: Use invalid hex code (should fallback to white)
 
 ---
 
