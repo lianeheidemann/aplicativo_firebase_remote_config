@@ -46,13 +46,11 @@ This project provides a production-ready implementation of Firebase Remote Confi
 
 **Background Color Update**
 
-<img align="left" src="https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig/raw/main/assets/gifs/gif1_cor_FirebaseRemoteConfig.gif" width="400" alt="Background Color Update">
+<img src="https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig/raw/main/assets/gifs/gif1_cor_FirebaseRemoteConfig.gif" width="45%" alt="Background Color Update">
 
 **Promotional Content Management**
 
-<img align="left" src="https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig/raw/main/assets/gifs/gif2_propaganda_FirebaseRemoteConfig.gif" width="400" alt="Promotional Content Management">
-
-<br clear="left">
+<img src="https://github.com/lianeheidemann/aplicativo_firebaseremoteconfig/raw/main/assets/gifs/gif2_propaganda_FirebaseRemoteConfig.gif" width="45%" alt="Promotional Content Management">
 
 ---
 
