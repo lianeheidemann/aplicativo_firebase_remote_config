@@ -29,16 +29,17 @@ This project provides a production-ready implementation of Firebase Remote Confi
 
 ## Features
 
-| Category | Capabilities |
-|----------|--------------|
-| **Core Functionality** | Firebase initialization with `firebase_core` |
-| | Automatic fetch and activation of Remote Config |
-| | Real-time dynamic UI updates |
-| | Manual refresh functionality |
-| **UI Components** | Background color customization |
-| | Dynamic promotional images |
-| | Graceful fallback to default values |
-| | Production-ready error handling |
+**Core Functionality**
+- Firebase initialization with `firebase_core`
+- Automatic fetch and activation of Remote Config
+- Real-time dynamic UI updates
+- Manual refresh functionality
+
+**UI Components**
+- Background color customization
+- Dynamic promotional images
+- Graceful fallback to default values
+- Production-ready error handling
 
 ---
 
