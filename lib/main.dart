@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: _backgroundColor,
       appBar: AppBar(
-        title: const Text('Remote Config'),
+        title: const Text('Pedal a Bordo'),
         actions: [
           IconButton(
             onPressed: _loading ? null : _loadRemoteConfig,
