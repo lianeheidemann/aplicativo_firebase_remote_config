@@ -28,18 +28,6 @@
 
 ---
 
-## Technology Stack
-
-| Component | Purpose |
-|-----------|---------|
-| Flutter | Cross-platform UI framework |
-| firebase_core | Firebase initialization |
-| firebase_remote_config | Configuration management |
-| url_launcher | URL navigation |
-| Dart | Programming language |
-
----
-
 ## Installation
 
 ### System Requirements
